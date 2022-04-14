@@ -22,7 +22,7 @@ client.on('interactionCreate', async (interaction) => {
         await interaction.reply(
             `Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
     } else if (commandName === 'user') {
-        await interaction.reply(`Your username: ${interaction.author.username}\nYour ID: ${interaction.author.id}`);
+        await interaction.reply(`Your username: ${interaction.user.tag}\nYour ID: ${interaction.user.id}`);
     }
 });
 
