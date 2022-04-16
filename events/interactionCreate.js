@@ -2,6 +2,7 @@ module.exports = {
   name: 'interactionCreate',
   execute(interaction, client) {
     console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
+
     const command = client.commands.get(interaction.commandName);
     if (!command) return;
     try {
