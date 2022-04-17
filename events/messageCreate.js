@@ -7,9 +7,6 @@ module.exports = {
       `${message.author.tag} in #${message.channel.name} said: ${message.content}`);
     if (message.content.startsWith(client.config.prefix)) {
       const commandName = message.content.slice(client.config.prefix.length).split(' ')[0];
-      if (commandName === 'server' || commandName === 'user') {
-        return;
-      }
       const command = client.commands.get(commandName);
       if (!command) return;
       try {

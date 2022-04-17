@@ -8,16 +8,13 @@ module.exports = {
   async execute(interaction) {
     try {
       let output = '';
+      const { prefix } = require('../config.json');
       const commandFiles = fs
         .readdirSync('./commands')
         .filter((file) => file.endsWith('.js'));
       for (const file of commandFiles) {
-        if (file === 'help.js') {
-          output += '**help**: Prints all available commands\n';
-          continue;
-        }
         const command = require(`./${file}`);
-        output += `**${command.data.name}**: ${command.data.description}\n`;
+        output += `**${prefix}${command.data.name}**: ${command.data.description}\n`;
       }
       interaction.reply(output);
     } catch (err) {

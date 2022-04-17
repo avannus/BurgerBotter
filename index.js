@@ -38,21 +38,21 @@ fs.access('./data', function(err) {
   } else {
     console.log('data directory already exists');
   }
-  ensureUserDB();
+  ensuredb();
 });
 
-function ensureUserDB() {
-  fs.access('./data/userDB.json', function(err) {
+function ensuredb() {
+  fs.access('./data/db.json', function(err) {
     if (err) {
       const initData = {
         'users': [],
       };
-      fs.writeFileSync('./data/userDB.json', JSON.stringify(initData));
+      fs.writeFileSync('./data/db.json', JSON.stringify(initData));
     } else {
-      console.log('userDB already exists');
+      console.log('db already exists');
     }
-    const data = JSON.parse(fs.readFileSync('./data/userDB.json'));
-    fs.writeFileSync('./data/userDB.json', JSON.stringify(data));
+    const data = JSON.parse(fs.readFileSync('./data/db.json'));
+    fs.writeFileSync('./data/db.json', JSON.stringify(data));
   });
 }
 

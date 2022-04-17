@@ -1,20 +1,25 @@
-const fs = require('node:fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
 
-const commands = [];
-const commandFiles = fs
-  .readdirSync('./commands')
-  .filter((file) => file.endsWith('.js'));
+// add help command to the list of commands
+const commands = [
+  require('./commands/help.js').data.toJSON(),
+];
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  commands.push(command.data.toJSON());
-}
+/*
+adds all commands to '/' Discord menu
+*/
+// for (const file of helpFile) {
+//   if (file === 'help.js') {
+//     const command = require(`./commands/${file}`);
+//     commands.push(command.data.toJSON());
+//   }
+// }
+
+console.log(`${commands.length} commands found`);
 
 const rest = new REST({ version: '9' }).setToken(token);
-
 rest
   .put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
   .then(() => console.log('Successfully registered application commands.'))
